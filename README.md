@@ -1,15 +1,14 @@
 # SendCloudApi.Net
-------------------
 
 This wrapper helps you to easily connect to the SendCloud API when you use Asp.Net as your main programming language.
 
 Feel free to improve the wrapper by sending a pull request.
 
-##Supported API versions
+## Supported API versions
 ----------------------
 This wrapper is designed for API v2. Which is currently the most recent version of the SendCloud API.
 
-##Example
+## Example
 -------
 ```
 var api = new Net.SendCloudApi("API_KEY", "API_SECRET");
@@ -18,7 +17,7 @@ var api = new Net.SendCloudApi("API_KEY", "API_SECRET");
 var shippingMethods = api.ShippingMethods.Get();
 ```
 
-##Documentation
+## Documentation
 ----------------------
 Documentation is available here:
 [SendCloud API v2 Documentation](https://docs.sendcloud.sc/api/v2/index.html)
