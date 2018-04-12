@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace SendCloudApi.Net.Models
 {
@@ -17,10 +18,19 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "value", EmitDefaultValue = false, IsRequired = true)]
         public double Value { get; set; }
 
-        [DataMember(Name = "hs_code", EmitDefaultValue = false, IsRequired = true)]
+        [DataMember(Name = "hs_code", EmitDefaultValue = false, IsRequired = false)]
         public string HarmonizedSystemCode { get; set; }
 
-        [DataMember(Name = "origin_country", EmitDefaultValue = false, IsRequired = true)]
+        [DataMember(Name = "origin_country", EmitDefaultValue = false, IsRequired = false)]
         public string OriginCountry { get; set; }
+
+        [DataMember(Name = "product_id", EmitDefaultValue = false, IsRequired = false)]
+        public string ProductId { get; set; }
+
+        [DataMember(Name = "properties", EmitDefaultValue = false, IsRequired = false)]
+        public Dictionary<string, string> Properties { get; set; }
+
+        [DataMember(Name = "sku", EmitDefaultValue = false, IsRequired = false)]
+        public string StockKeepingUnit { get; set; }
     }
 }

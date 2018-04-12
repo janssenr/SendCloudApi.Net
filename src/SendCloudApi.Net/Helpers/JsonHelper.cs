@@ -14,7 +14,7 @@ namespace SendCloudApi.Net.Helpers
         public static string Serialize<T>(T obj, string dateTimeFormat)
         {
             string retVal;
-            var serializer = new DataContractJsonSerializer(typeof(T), new DataContractJsonSerializerSettings { DateTimeFormat = new DateTimeFormat(dateTimeFormat) });
+            var serializer = new DataContractJsonSerializer(typeof(T), new DataContractJsonSerializerSettings { DateTimeFormat = new DateTimeFormat(dateTimeFormat), UseSimpleDictionaryFormat = true });
             using (var ms = new MemoryStream())
             {
                 serializer.WriteObject(ms, obj);
@@ -26,7 +26,7 @@ namespace SendCloudApi.Net.Helpers
         public static T Deserialize<T>(string json, string dateTimeFormat)
         {
             T obj;
-            var serializer = new DataContractJsonSerializer(typeof(T), new DataContractJsonSerializerSettings { DateTimeFormat = new DateTimeFormat(dateTimeFormat) });
+            var serializer = new DataContractJsonSerializer(typeof(T), new DataContractJsonSerializerSettings { DateTimeFormat = new DateTimeFormat(dateTimeFormat), UseSimpleDictionaryFormat = true });
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
             {
                 obj = (T)serializer.ReadObject(ms);

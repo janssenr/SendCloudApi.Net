@@ -35,5 +35,8 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "modules", EmitDefaultValue = false, IsRequired = true)]
         public Module[] Modules { get; set; }
+
+        //[DataMember(Name = "invoices", EmitDefaultValue = false, IsRequired = true)]
+        //public Invoice<string>[] Invoices { get; set; }
     }
 }

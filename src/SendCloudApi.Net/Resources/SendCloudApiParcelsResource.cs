@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SendCloudApi.Net.Helpers;
 using SendCloudApi.Net.Models;
@@ -30,15 +31,21 @@ namespace SendCloudApi.Net.Resources
             return await Create<Parcel<Country>>(JsonHelper.Serialize(wrapper, DateTimeFormat));
         }
 
-        public async Task<Parcel<Country>[]> Get(int? limit = null, int? offset = null, string orderNumber = null)
+        public async Task<Parcel<Country>[]> Get(int? limit = null, int? offset = null, int? parcelStatus = null, string trackingNumber = null, string orderNumber = null, DateTime? updatedAfter = null)
         {
             var parameters = new Dictionary<string, string>();
             if (limit.HasValue)
                 parameters.Add("limit", limit.Value.ToString());
             if (offset.HasValue)
                 parameters.Add("offset", offset.Value.ToString());
+            if (parcelStatus.HasValue)
+                parameters.Add("parcel_status", parcelStatus.Value.ToString());
+            if (!string.IsNullOrWhiteSpace(trackingNumber))
+                parameters.Add("tracking_number", trackingNumber);
             if (!string.IsNullOrWhiteSpace(orderNumber))
                 parameters.Add("order_number", orderNumber);
+            if (updatedAfter.HasValue)
+                parameters.Add("updated_after", updatedAfter.Value.ToString("yyyy-MM-ddTHH:mm:ss"));
             return await Get<Parcel<Country>[]>(parameters: parameters);
         }
 
