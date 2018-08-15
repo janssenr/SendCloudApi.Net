@@ -39,7 +39,7 @@ var parcel = new CreateParcel
 	PostalCode = "3423 DD",
 	Country = "NL",
 	RequestLabel = true,
-    ShippingMethod = 1, // Shipping method, get possibilities from client.ShippingMethods.Get()
+	ShippingMethod = 1, // Shipping method, get possibilities from client.ShippingMethods.Get()
 	OrderNumber = "ORDER2014-52321",
 };
 var response = await client.Parcels.Create(parcel);
