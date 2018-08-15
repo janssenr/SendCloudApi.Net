@@ -87,6 +87,9 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "type", EmitDefaultValue = false, IsRequired = false)]
         public string Type { get; set; }
 
+        [DataMember(Name = "shipping_method", EmitDefaultValue = false, IsRequired = false)]
+        public int? ShippingMethod { get; set; }
+
         [DataMember(Name = "carrier", EmitDefaultValue = false, IsRequired = false)]
         public Carrier Carrier { get; set; }
 

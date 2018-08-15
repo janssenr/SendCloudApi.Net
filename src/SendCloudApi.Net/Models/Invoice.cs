@@ -9,9 +9,6 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "id", EmitDefaultValue = false, IsRequired = true)]
         public int Id { get; set; }
 
-        [DataMember(Name = "description", EmitDefaultValue = false, IsRequired = false)]
-        public string Description { get; set; }
-
         [DataMember(Name = "ref", EmitDefaultValue = false, IsRequired = true)]
         public string Reference { get; set; }
 

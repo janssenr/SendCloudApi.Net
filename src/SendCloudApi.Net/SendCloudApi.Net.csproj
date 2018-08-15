@@ -43,10 +43,12 @@
   <ItemGroup>
     <Compile Include="Exceptions\SendCloudException.cs" />
     <Compile Include="Exceptions\SendCloudError.cs" />
+    <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Models\CustomsShipmentType.cs" />
     <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\ParcelItem.cs" />
+    <Compile Include="Models\ParcelStatusChangeEvent.cs" />
     <Compile Include="Wrappers\DataWrapper.cs" />
     <Compile Include="Models\AddressDivided.cs" />
     <Compile Include="Models\Carrier.cs" />
