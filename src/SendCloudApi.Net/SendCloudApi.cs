@@ -143,11 +143,11 @@ namespace SendCloudApi.Net
                 }
                 return JsonHelper.Deserialize<T>(jsonResult, dateTimeFormat);
             }
-            HandleResponseError(response);
+            await HandleResponseError(response);
             return default(T);
         }
 
-        private async void HandleResponseError(HttpResponseMessage response)
+        private async Task HandleResponseError(HttpResponseMessage response)
         {
             string message;
             switch (response.StatusCode)
