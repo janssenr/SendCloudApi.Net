@@ -9,7 +9,7 @@ namespace SendCloudApi.Net.Helpers
     /// <summary>
     /// Summary description for JsonHelper
     /// </summary>
-    public class JsonHelper
+    public static class JsonHelper
     {
         public static string Serialize<T>(T obj, string dateTimeFormat)
         {

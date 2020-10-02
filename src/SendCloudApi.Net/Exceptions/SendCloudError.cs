@@ -9,7 +9,7 @@ namespace SendCloudApi.Net.Exceptions
         public string Message { get; set; }
 
         [DataMember(Name = "code", EmitDefaultValue = false, IsRequired = true)]
-        public int Code { get; set; }
+        public string Code { get; set; }
 
         [DataMember(Name = "request", EmitDefaultValue = false, IsRequired = true)]
         public string Request { get; set; }

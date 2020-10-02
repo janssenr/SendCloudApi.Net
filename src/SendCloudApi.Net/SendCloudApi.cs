@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -9,25 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 using SendCloudApi.Net.Exceptions;
 using SendCloudApi.Net.Helpers;
-using SendCloudApi.Net.Models;
 using SendCloudApi.Net.Resources;
 
 namespace SendCloudApi.Net
 {
     public class SendCloudApi
     {
-        private const string HostUrl = "https://panel.sendcloud.sc/api/v2/";
-        private readonly Uri _apiUrl;
         private readonly string _apiKey;
         private readonly string _apiSecret;
         private readonly string _partnerUuid;
         public readonly SendCloudApiParcelsResource Parcels;
+        public readonly SendCloudApiParcelDocumentsResource ParcelDocuments;
         public readonly SendCloudApiParcelStatusResource ParcelStatuses;
-        public readonly SendCloudApiShippingResource ShippingMethods;
-        public readonly SendCloudApiUserResource User;
-        public readonly SendCloudApiLabelResource Label;
+        public readonly SendCloudApiReturnsResource Returns;
+        public readonly SendCloudApiBrandsResource Brands;
+        public readonly SendCloudApiShippingMethodsResource ShippingMethods;
+        public readonly SendCloudApiLabelsResource Label;
+        public readonly SendCloudApiUsersResource User;
         public readonly SendCloudApiInvoicesResource Invoices;
         public readonly SendCloudApiSenderAddressResource SenderAddresses;
+        public readonly SendCloudApiIntegrationsResource Integrations;
+        public readonly SendCloudApiReturnPortalResource ReturnPortal;
+        public readonly SendCloudApiServicePointsResource ServicePoints;
 
         public SendCloudApi(string apiKey, string apiSecret, string partnerUuid = null)
         {
@@ -37,51 +39,59 @@ namespace SendCloudApi.Net
             }
             _apiKey = apiKey;
             _apiSecret = apiSecret;
-            _apiUrl = new Uri(HostUrl);
             _partnerUuid = partnerUuid;
             Parcels = new SendCloudApiParcelsResource(this);
+            ParcelDocuments = new SendCloudApiParcelDocumentsResource(this);
             ParcelStatuses = new SendCloudApiParcelStatusResource(this);
-            ShippingMethods = new SendCloudApiShippingResource(this);
-            User = new SendCloudApiUserResource(this);
-            Label = new SendCloudApiLabelResource(this);
+            Returns = new SendCloudApiReturnsResource(this);
+            Brands = new SendCloudApiBrandsResource(this);
+            ShippingMethods = new SendCloudApiShippingMethodsResource(this);
+            Label = new SendCloudApiLabelsResource(this);
+            User = new SendCloudApiUsersResource(this);
             Invoices = new SendCloudApiInvoicesResource(this);
             SenderAddresses = new SendCloudApiSenderAddressResource(this);
+            Integrations = new SendCloudApiIntegrationsResource(this);
+            ReturnPortal = new SendCloudApiReturnPortalResource(this);
+            ServicePoints = new SendCloudApiServicePointsResource(this);
         }
 
-        public string GetApiKey()
+        internal string GetApiKey()
         {
             return _apiKey;
         }
 
-        public string GetApiSecret()
+        internal string GetApiSecret()
         {
             return _apiSecret;
         }
 
-        public async Task<T> Create<T>(string url, string data, string returnObject, string dateTimeFormat)
+        internal string GetBasicAuth()
         {
-            return await SendRequest<T>(url, "POST", null, data, returnObject, dateTimeFormat);
+            return $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(_apiKey + ":" + _apiSecret))}";
         }
 
-        public async Task<T> Get<T>(string url, Dictionary<string, string> parameters, string returnObject, string dateTimeFormat)
+        internal string GetAccessToken()
         {
-            return await SendRequest<T>(url, "GET", parameters, null, returnObject, dateTimeFormat);
+            return $"AccessToken {_apiKey}";
         }
 
-        public async Task<T> Update<T>(string url, string data, string returnObject, string dateTimeFormat)
+        internal async Task<T> Create<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
         {
-            return await SendRequest<T>(url, "PUT", null, data, returnObject, dateTimeFormat);
+            return await SendRequest<T>(url, authorization, "POST", null, data, returnObject, dateTimeFormat);
         }
 
-        public async Task<ParcelCancel> CancelParcel(string url, string dateTimeFormat)
+        internal async Task<T> Get<T>(string url, string authorization, Dictionary<string, string> parameters, string returnObject, string dateTimeFormat)
         {
-            return await SendRequest<ParcelCancel>(url, "POST", null, string.Empty, null, dateTimeFormat);
+            return await SendRequest<T>(url, authorization, "GET", parameters, null, returnObject, dateTimeFormat);
         }
 
-        private Uri GetUrl(string url, Dictionary<string, string> parameters = null)
+        internal async Task<T> Update<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
         {
-            var apiUrl = _apiUrl.ToString();
-            apiUrl += url;
+            return await SendRequest<T>(url, authorization, "PUT", null, data, returnObject, dateTimeFormat);
+        }
+
+        internal Uri GetUrl(string url, Dictionary<string, string> parameters = null)
+        {
             if (parameters != null && parameters.Any())
             {
                 var queryParameters = string.Join("&",
@@ -92,16 +102,19 @@ namespace SendCloudApi.Net
                                 : $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(p.Value)}"));
                 if (!string.IsNullOrWhiteSpace(queryParameters))
                 {
-                    apiUrl += "?" + queryParameters;
+                    url += "?" + queryParameters;
                 }
             }
-            return new Uri(apiUrl);
+            return new Uri(url);
         }
 
-        private async Task<T> SendRequest<T>(string url, string method, Dictionary<string, string> parameters, string data, string returnObject, string dateTimeFormat)
+        private async Task<T> SendRequest<T>(string url, string authorization, string method, Dictionary<string, string> parameters, string data, string returnObject, string dateTimeFormat)
         {
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes(_apiKey + ":" + _apiSecret))}");
+            if (!string.IsNullOrWhiteSpace(authorization))
+            {
+                httpClient.DefaultRequestHeaders.Add("Authorization", authorization);
+            }
             if (!string.IsNullOrWhiteSpace(_partnerUuid))
             {
                 httpClient.DefaultRequestHeaders.Add("Sendcloud-Partner-Id", _partnerUuid);

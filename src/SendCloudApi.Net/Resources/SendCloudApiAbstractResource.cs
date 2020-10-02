@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace SendCloudApi.Net.Resources
@@ -7,6 +6,8 @@ namespace SendCloudApi.Net.Resources
     public abstract class SendCloudApiAbstractResource
     {
         protected readonly SendCloudApi Client;
+        protected string HostUrl = "https://panel.sendcloud.sc/api/v2/";
+        protected string Authorization;
         protected bool CreateRequest = true;
         protected bool GetRequest = true;
         protected bool UpdateRequest = true;
@@ -20,13 +21,14 @@ namespace SendCloudApi.Net.Resources
         protected SendCloudApiAbstractResource(SendCloudApi client)
         {
             Client = client;
+            Authorization = client.GetBasicAuth();
         }
 
         protected async Task<T> Create<T>(string data)
         {
             if (CreateRequest)
             {
-                return await Client.Create<T>(CreateResource, data, SingleResource, DateTimeFormat);
+                return await Client.Create<T>($"{HostUrl}{CreateResource}", Authorization, data, SingleResource, DateTimeFormat);
             }
             return default(T);
         }
@@ -37,18 +39,22 @@ namespace SendCloudApi.Net.Resources
             {
                 if (objectId.HasValue)
                 {
-                    return await Client.Get<T>($"{Resource}/{objectId.Value}", parameters, SingleResource, DateTimeFormat);
+                    return await Client.Get<T>($"{HostUrl}{Resource}/{objectId.Value}", Authorization, parameters, SingleResource, DateTimeFormat);
                 }
-                return await Client.Get<T>(Resource, parameters, ListResource, DateTimeFormat);
+                return await Client.Get<T>($"{HostUrl}{Resource}", Authorization, parameters, ListResource, DateTimeFormat);
             }
             return default(T);
         }
 
-        protected async Task<T> Update<T>(string data)
+        protected async Task<T> Update<T>(string data, int? objectId = null)
         {
             if (UpdateRequest)
             {
-                return await Client.Update<T>(UpdateResource, data, SingleResource, DateTimeFormat);
+                if (objectId.HasValue)
+                {
+                    return await Client.Update<T>($"{HostUrl}{UpdateResource}/{objectId.Value}", Authorization, data, SingleResource, DateTimeFormat);
+                }
+                return await Client.Update<T>($"{HostUrl}{UpdateResource}", Authorization, data, SingleResource, DateTimeFormat);
             }
             return default(T);
         }

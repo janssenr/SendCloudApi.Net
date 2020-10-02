@@ -22,7 +22,7 @@ namespace SendCloudApi.Net.Resources
         public async Task<Parcel<Country>[]> BulkCreate(CreateParcel[] parcels)
         {
             var wrapper = new DataWrapper { Parcels = parcels };
-            return await Client.Create<Parcel<Country>[]>(CreateResource, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat);
+            return await Client.Create<Parcel<Country>[]>(CreateResource, Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat);
         }
 
         public async Task<Parcel<Country>> Create(CreateParcel parcel)
@@ -62,7 +62,12 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<ParcelCancel> Cancel(int parcelId)
         {
-            return await Client.CancelParcel($"{Resource}/{parcelId}/cancel", DateTimeFormat);
+            return await Client.Create<ParcelCancel>($"{HostUrl}{Resource}/{parcelId}/cancel", Authorization, null, string.Empty, DateTimeFormat);
+        }
+
+        public async Task<string> GetReturnPortalUrl(int parcelId)
+        {
+            return await Client.Get<string>($"{HostUrl}{Resource}/{parcelId}/return_portal_url", Authorization, null, "url", DateTimeFormat);
         }
     }
 }

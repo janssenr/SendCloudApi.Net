@@ -3,12 +3,15 @@
 namespace SendCloudApi.Net.Models
 {
     [DataContract]
-    public class ParcelStatus
+    public class Status
     {
         [DataMember(Name = "id", EmitDefaultValue = false, IsRequired = true)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [DataMember(Name = "message", EmitDefaultValue = false, IsRequired = true)]
         public string Message { get; set; }
+
+        [DataMember(Name = "global_status_slug", EmitDefaultValue = false, IsRequired = false)]
+        public string GlobalStatusSlug { get; set; }
     }
 }

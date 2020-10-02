@@ -46,7 +46,7 @@ namespace SendCloudApi.Net.Models
         public ShippingMethod Shipment { get; set; }
 
         [DataMember(Name = "status", EmitDefaultValue = false, IsRequired = false)]
-        public ParcelStatus Status { get; set; }
+        public Status Status { get; set; }
 
         [DataMember(Name = "to_service_point", EmitDefaultValue = false, IsRequired = false)]
         public int? ToServicePointId { get; set; }
@@ -84,11 +84,41 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "parcel_items", EmitDefaultValue = false, IsRequired = false)]
         public ParcelItem[] ParcelItems { get; set; }
 
+        [DataMember(Name = "documents", EmitDefaultValue = false, IsRequired = false)]
+        public Document[] Documents { get; set; }
+
         [DataMember(Name = "type", EmitDefaultValue = false, IsRequired = false)]
         public string Type { get; set; }
 
+        [DataMember(Name = "shipment_uuid", EmitDefaultValue = false, IsRequired = false)]
+        public string ShipmentUuid { get; set; }
+
         [DataMember(Name = "shipping_method", EmitDefaultValue = false, IsRequired = false)]
         public int? ShippingMethod { get; set; }
+
+        [DataMember(Name = "external_order_id", EmitDefaultValue = false, IsRequired = false)]
+        public string ExternalOrderId { get; set; }
+
+        [DataMember(Name = "external_shipment_id", EmitDefaultValue = false, IsRequired = false)]
+        public string ExternalShipmentId { get; set; }
+
+        [DataMember(Name = "external_reference", EmitDefaultValue = false, IsRequired = false)]
+        public string ExternalReference { get; set; }
+
+        [DataMember(Name = "is_return", EmitDefaultValue = false, IsRequired = false)]
+        public bool IsReturn { get; set; }
+
+        [DataMember(Name = "note", EmitDefaultValue = false, IsRequired = false)]
+        public string Note { get; set; }
+
+        [DataMember(Name = "to_post_number", EmitDefaultValue = false, IsRequired = false)]
+        public string ToPostNumber { get; set; }
+
+        [DataMember(Name = "total_order_value", EmitDefaultValue = false, IsRequired = false)]
+        public string TotalOrderValue { get; set; }
+
+        [DataMember(Name = "total_order_value_currency", EmitDefaultValue = false, IsRequired = false)]
+        public string TotalOrderValueCurrency { get; set; }
 
         [DataMember(Name = "carrier", EmitDefaultValue = false, IsRequired = false)]
         public Carrier Carrier { get; set; }

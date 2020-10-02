@@ -14,9 +14,9 @@ namespace SendCloudApi.Net.Resources
             UpdateRequest = false;
         }
 
-        public async Task<ParcelStatus[]> Get()
+        public async Task<Status[]> Get()
         {
-            return await Get<ParcelStatus[]>();
+            return await Get<Status[]>();
         }
     }
 }
