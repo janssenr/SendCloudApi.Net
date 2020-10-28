@@ -139,6 +139,9 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "request_label_async", EmitDefaultValue = false, IsRequired = false)]
         public bool RequestLabelASync { get; set; }
 
+        [DataMember(Name = "apply_shipping_rules", EmitDefaultValue = false, IsRequired = false)]
+        public bool ApplyShippingRules { get; set; }
+
         [DataMember(Name = "sender_address", EmitDefaultValue = false, IsRequired = false)]
         public int SenderAddressId { get; set; }
 
