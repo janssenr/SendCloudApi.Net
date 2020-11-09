@@ -170,8 +170,15 @@ namespace SendCloudApi.Net
                     break;
                 default:
                     var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var result = JsonHelper.DeserializeAsDictionary<SendCloudError>(responseBody, "yyyy-MM-dd HH:mm:ss");
-                    message = result["error"].Message;
+                    var result = JsonHelper.Deserialize<SendCloudError>(responseBody, "yyyy-MM-dd HH:mm:ss");
+
+                    message = result.Message;
+
+                    if (!string.IsNullOrEmpty(result.Error?.Message))
+                    {
+                        message = result.Error.Message;
+                    }
+
                     break;
             }
             throw new SendCloudException(message);
