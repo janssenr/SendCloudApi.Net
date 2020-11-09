@@ -62,7 +62,7 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<ParcelCancel> Cancel(int parcelId)
         {
-            return await Client.Create<ParcelCancel>($"{HostUrl}{Resource}/{parcelId}/cancel", Authorization, null, string.Empty, DateTimeFormat);
+            return await Client.Create<ParcelCancel>($"{HostUrl}{Resource}/{parcelId}/cancel", Authorization, string.Empty, string.Empty, DateTimeFormat);
         }
 
         public async Task<string> GetReturnPortalUrl(int parcelId)
