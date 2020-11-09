@@ -1,14 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  
-  <PropertyGroup>
-    <RootNamespace>SendCloudApi.Net</RootNamespace>
-    <AssemblyName>SendCloudApi.Net</AssemblyName>
-    <TargetFrameworks>net451;netstandard2</TargetFrameworks>
-    <PackageId>SendCloudApi.Net</PackageId>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net451'">
-    <Reference Include="System.Net.Http" />
-  </ItemGroup>
-  
+	<PropertyGroup>
+		<RootNamespace>SendCloudApi.Net</RootNamespace>
+		<AssemblyName>SendCloudApi.Net</AssemblyName>
+		<TargetFrameworks>net451;netstandard2</TargetFrameworks>
+		<TargetFramework>net451</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>SendCloudApi.Net</PackageId>
+		<Version>2.0.5</Version>
+		<Authors>Rob Janssen</Authors>
+		<Company />
+		<Description>A C#/.net wrapper for the SendCloud API</Description>
+		<Copyright>Copyright Rob Janssen 2020</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/janssenr/SendCloudApi.Net</PackageProjectUrl>
+		<PackageIcon>cropped-5-Sendcloud-App-Icon-1-192x192.png</PackageIcon>
+		<PackageTags>sendcloud postnl api rest data</PackageTags>
+		<PackageReleaseNotes>dotnet core support, error handling cancellations</PackageReleaseNotes>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net451'">
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\nuget\Package\images\cropped-5-Sendcloud-App-Icon-1-192x192.png">
+			<Pack>True</Pack>
+			<PackagePath/>
+		</None>
+	</ItemGroup>
 </Project>
