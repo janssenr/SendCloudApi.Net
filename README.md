@@ -13,7 +13,7 @@ Install-Package SendCloudApi
 ## Set-up connection
 Prepare the client for connecting to SendCloud with your API key, API secret and Sendcloud Partner id (optional)
 ```C#
-var client = new SendCloudApi("apikey", "apisecret", "partnerid")
+var client = new SendCloudApi.Net.SendCloudApi("apikey", "apisecret", "partnerid")
 ```
 
 ## Get all parcels
