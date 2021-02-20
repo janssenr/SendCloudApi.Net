@@ -22,7 +22,7 @@ namespace SendCloudApi.Net.Resources
         public async Task<Parcel<Country>[]> BulkCreate(CreateParcel[] parcels)
         {
             var wrapper = new DataWrapper { Parcels = parcels };
-            return await Client.Create<Parcel<Country>[]>(CreateResource, Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat);
+            return await Client.Create<Parcel<Country>[]>($"{HostUrl}{Resource}", Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat);
         }
 
         public async Task<Parcel<Country>> Create(CreateParcel parcel)
