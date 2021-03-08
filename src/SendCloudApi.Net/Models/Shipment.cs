@@ -13,6 +13,12 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "address_2", EmitDefaultValue = false, IsRequired = false)]
         public string Address2 { get; set; }
 
+        [DataMember(Name = "allowed_shipping_methods", EmitDefaultValue = false, IsRequired = false)]
+        public int[] AllowedShippingMethods { get; set; }
+
+        [DataMember(Name = "barcode", EmitDefaultValue = false, IsRequired = false)]
+        public string Barcode { get; set; }
+
         [DataMember(Name = "city", EmitDefaultValue = false, IsRequired = false)]
         public string City { get; set; }
 
@@ -46,6 +52,9 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "house_number", EmitDefaultValue = false, IsRequired = true)]
         public string HouseNumber { get; set; }
 
+        [DataMember(Name = "integration", EmitDefaultValue = false, IsRequired = true)]
+        public int IntegrationId { get; set; }
+
         [DataMember(Name = "name", EmitDefaultValue = false, IsRequired = false)]
         public string Name { get; set; }
 
@@ -67,6 +76,9 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "sender_address", EmitDefaultValue = false, IsRequired = false)]
         public int SenderAddressId { get; set; }
 
+        [DataMember(Name = "shipment_uuid", EmitDefaultValue = false, IsRequired = false)]
+        public string ShipmentUuid { get; set; }
+
         [DataMember(Name = "shipping_method", EmitDefaultValue = false, IsRequired = false)]
         public int ShippingMethodId { get; set; }
 
@@ -84,6 +96,9 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "to_state", EmitDefaultValue = false, IsRequired = false)]
         public string ToState { get; set; }
+
+        [DataMember(Name = "total_order_value", EmitDefaultValue = false, IsRequired = false)]
+        public string TotalOrderValue { get; set; }
 
         [DataMember(Name = "updated_at", EmitDefaultValue = false, IsRequired = false)]
         public DateTime UpdatedAt { get; set; }
