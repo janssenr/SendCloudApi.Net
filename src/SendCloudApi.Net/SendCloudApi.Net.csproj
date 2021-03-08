@@ -5,17 +5,17 @@
 		<TargetFrameworks>net451;netstandard2</TargetFrameworks>
 		<TargetFramework>net451</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageId>SendCloudApi.Net</PackageId>
-		<Version>2.0.5</Version>
+		<PackageId>SendCloudApi</PackageId>
+		<Version>2.0.3</Version>
 		<Authors>Rob Janssen</Authors>
 		<Company />
 		<Description>A C#/.net wrapper for the SendCloud API</Description>
-		<Copyright>Copyright Rob Janssen 2020</Copyright>
+		<Copyright>Copyright Rob Janssen 2021</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/janssenr/SendCloudApi.Net</PackageProjectUrl>
 		<PackageIcon>cropped-5-Sendcloud-App-Icon-1-192x192.png</PackageIcon>
 		<PackageTags>sendcloud postnl api rest data</PackageTags>
-		<PackageReleaseNotes>dotnet core support, error handling cancellations</PackageReleaseNotes>
+		<PackageReleaseNotes>Solved error message when getting list of shipments</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net451'">
 		<Reference Include="System.Net.Http" />
@@ -23,7 +23,7 @@
 	<ItemGroup>
 		<None Include="..\..\nuget\Package\images\cropped-5-Sendcloud-App-Icon-1-192x192.png">
 			<Pack>True</Pack>
-			<PackagePath/>
+			<PackagePath />
 		</None>
 	</ItemGroup>
 </Project>

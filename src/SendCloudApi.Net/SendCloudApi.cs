@@ -37,6 +37,7 @@ namespace SendCloudApi.Net
             {
                 throw new SendCloudException("You must have an API key and an API secret key");
             }
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             _apiKey = apiKey;
             _apiSecret = apiSecret;
             _partnerUuid = partnerUuid;
