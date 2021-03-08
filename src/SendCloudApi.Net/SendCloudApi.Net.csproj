@@ -6,7 +6,7 @@
 		<TargetFramework>net451</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>SendCloudApi</PackageId>
-		<Version>2.0.3</Version>
+		<Version>2.0.4</Version>
 		<Authors>Rob Janssen</Authors>
 		<Company />
 		<Description>A C#/.net wrapper for the SendCloud API</Description>

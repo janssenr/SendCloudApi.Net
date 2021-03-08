@@ -15,8 +15,7 @@ namespace SendCloudApi.Net.Resources
             ListResource = "";
             SingleResource = "";
             CreateRequest = false;
-            DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.FFFFFFZ";
-            //DateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
+            DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.FFFFFFzzz";
         }
 
         public async Task<Integration[]> Get()
@@ -46,7 +45,7 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("sender_address ", senderAddressId.Value.ToString());
 
             string url = $"{HostUrl}/integrations/{integrationId}/shipments";
-            return await Client.Get<Shipment[]>(url, Authorization, parameters, "results", DateTimeFormat);
+            return await Client.Get<Shipment[]>(url, Authorization, parameters, "results", "yyyy-MM-ddTHH:mm:ss.FFFFFFZ");
         }
 
         public async Task<Shipment[]> InsertShipments(int integrationId, Shipment[] shipments)
