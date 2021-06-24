@@ -177,5 +177,8 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "country_state", EmitDefaultValue = false, IsRequired = false)]
         public string CountryState { get; set; }
+
+        [DataMember(Name = "quantity", EmitDefaultValue = false, IsRequired = false)]
+        public int Quantity { get; set; }
     }
 }

@@ -44,20 +44,20 @@ namespace SendCloudApi.Net.Resources
             if (senderAddressId.HasValue)
                 parameters.Add("sender_address ", senderAddressId.Value.ToString());
 
-            string url = $"{HostUrl}/integrations/{integrationId}/shipments";
+            string url = $"{HostUrl}integrations/{integrationId}/shipments";
             return await Client.Get<Shipment[]>(url, Authorization, parameters, "results", "yyyy-MM-ddTHH:mm:ss.FFFFFFZ");
         }
 
         public async Task<Shipment[]> InsertShipments(int integrationId, Shipment[] shipments)
         {
-            string url = $"{HostUrl}/integrations/{integrationId}/shipments";
+            string url = $"{HostUrl}integrations/{integrationId}/shipments";
             string data = JsonHelper.Serialize(shipments, DateTimeFormat);
             return await Client.Create<Shipment[]>(url, Authorization, data, "", DateTimeFormat);
         }
 
         public async Task<string> DeleteShipment(int integrationId, Shipment shipment)
         {
-            string url = $"{HostUrl}/integrations/{integrationId}/shipments/delete";
+            string url = $"{HostUrl}integrations/{integrationId}/shipments/delete";
             string data = JsonHelper.Serialize(shipment, DateTimeFormat);
             return await Client.Create<string>(url, Authorization, data, "", DateTimeFormat);
         }
