@@ -7,7 +7,7 @@ namespace SendCloudApi.Net.Resources
     public class SendCloudApiServicePointsResource
     {
         private readonly SendCloudApi _client;
-        private readonly string _hostUrl = " https://servicepoints.sendcloud.sc/api/v2/";
+        private readonly string _hostUrl = "https://servicepoints.sendcloud.sc/api/v2/";
         private readonly string _dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
         public SendCloudApiServicePointsResource(SendCloudApi client)
