@@ -37,5 +37,14 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "country", EmitDefaultValue = false, IsRequired = true)]
         public string Country { get; set; }
+
+        [DataMember(Name = "country_state", EmitDefaultValue = false, IsRequired = true)]
+        public string CountryState { get; set; }
+
+        [DataMember(Name = "vat_number", EmitDefaultValue = false, IsRequired = true)]
+        public string VatNumber { get; set; }
+
+        [DataMember(Name = "eori_number", EmitDefaultValue = false, IsRequired = true)]
+        public string EORINumber { get; set; }
     }
 }

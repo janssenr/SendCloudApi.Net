@@ -15,13 +15,15 @@ namespace SendCloudApi.Net.Resources
             UpdateRequest = false;
         }
 
-        public async Task<ShippingMethod[]> Get(string senderAddress = null, int? servicePointId = null)
+        public async Task<ShippingMethod[]> Get(string senderAddress = null, int? servicePointId = null, bool? isReturn = false)
         {
             var parameters = new Dictionary<string, string>();
             if (!string.IsNullOrWhiteSpace(senderAddress))
                 parameters.Add("sender_address", senderAddress);
             if (servicePointId.HasValue)
                 parameters.Add("service_point_id", servicePointId.ToString());
+            if (isReturn.HasValue)
+                parameters.Add("is_return", isReturn.ToString());
             return await Get<ShippingMethod[]>(parameters: parameters);
         }
 
