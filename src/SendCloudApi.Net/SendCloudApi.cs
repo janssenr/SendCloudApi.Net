@@ -30,6 +30,7 @@ namespace SendCloudApi.Net
         public readonly SendCloudApiIntegrationsResource Integrations;
         public readonly SendCloudApiReturnPortalResource ReturnPortal;
         public readonly SendCloudApiServicePointsResource ServicePoints;
+        public readonly SendCloudApiShippingPriceResource ShippingPrice;
 
         public SendCloudApi(string apiKey, string apiSecret, string partnerUuid = null)
         {
@@ -54,6 +55,7 @@ namespace SendCloudApi.Net
             Integrations = new SendCloudApiIntegrationsResource(this);
             ReturnPortal = new SendCloudApiReturnPortalResource(this);
             ServicePoints = new SendCloudApiServicePointsResource(this);
+            ShippingPrice = new SendCloudApiShippingPriceResource(this);
         }
 
         internal string GetApiKey()

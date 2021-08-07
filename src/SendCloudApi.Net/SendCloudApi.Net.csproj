@@ -15,7 +15,7 @@
 		<PackageProjectUrl>https://github.com/janssenr/SendCloudApi.Net</PackageProjectUrl>
 		<PackageIcon>cropped-5-Sendcloud-App-Icon-1-192x192.png</PackageIcon>
 		<PackageTags>sendcloud postnl api rest data</PackageTags>
-		<PackageReleaseNotes>Added allowed_shipping_methods and some other Shipment properties</PackageReleaseNotes>
+		<PackageReleaseNotes>Added Quantity property on CreateParcel to support multi-collo shipments</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net451'">
 		<Reference Include="System.Net.Http" />
