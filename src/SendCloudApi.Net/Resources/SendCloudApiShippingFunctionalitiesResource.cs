@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SendCloudApi.Net.Resources
 {
-    public class SendCloudApiShippingFunctionalities
+    public class SendCloudApiShippingFunctionalitiesResource
     {
         private readonly SendCloudApi _client;
         private readonly string _hostUrl = "https://panel.sendcloud.sc/api/v2/";
         private readonly string _dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
-        public SendCloudApiShippingFunctionalities(SendCloudApi client)
+        public SendCloudApiShippingFunctionalitiesResource(SendCloudApi client)
         {
             _client = client;
         }

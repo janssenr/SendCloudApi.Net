@@ -31,8 +31,9 @@ namespace SendCloudApi.Net
         public readonly SendCloudApiReturnPortalResource ReturnPortal;
         public readonly SendCloudApiServicePointsResource ServicePoints;
         public readonly SendCloudApiShippingPriceResource ShippingPrice;
-        public readonly SendCloudApiShippingFunctionalities ShippingFunctionalities;
-        public readonly SendCloudApiShippingProducts ShippingProducts;
+        public readonly SendCloudApiShippingFunctionalitiesResource ShippingFunctionalities;
+        public readonly SendCloudApiShippingProductsResource ShippingProducts;
+        public readonly SendCloudApiBoxResource Box;
 
         public SendCloudApi(string apiKey, string apiSecret, string partnerUuid = null)
         {
@@ -58,8 +59,9 @@ namespace SendCloudApi.Net
             ReturnPortal = new SendCloudApiReturnPortalResource(this);
             ServicePoints = new SendCloudApiServicePointsResource(this);
             ShippingPrice = new SendCloudApiShippingPriceResource(this);
-            ShippingFunctionalities = new SendCloudApiShippingFunctionalities(this);
-            ShippingProducts = new SendCloudApiShippingProducts(this);
+            ShippingFunctionalities = new SendCloudApiShippingFunctionalitiesResource(this);
+            ShippingProducts = new SendCloudApiShippingProductsResource(this);
+            Box = new SendCloudApiBoxResource(this);
         }
 
         internal string GetApiKey()

@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace SendCloudApi.Net.Resources
 {
-    public class SendCloudApiShippingProducts : SendCloudApiAbstractResource
+    public class SendCloudApiShippingProductsResource : SendCloudApiAbstractResource
     {
-        public SendCloudApiShippingProducts(SendCloudApi client) : base(client)
+        public SendCloudApiShippingProductsResource(SendCloudApi client) : base(client)
         {
             Resource = "shipping-products";
             ListResource = "";
-            SingleResource = "shipping-products";
+            SingleResource = "";
             CreateRequest = false;
             UpdateRequest = false;
         }

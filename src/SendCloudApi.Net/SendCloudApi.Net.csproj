@@ -6,7 +6,7 @@
 		<TargetFramework>net451</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>SendCloudApi</PackageId>
-		<Version>2.0.6</Version>
+		<Version>2.0.7</Version>
 		<Authors>Rob Janssen</Authors>
 		<Company />
 		<Description>A C#/.net wrapper for the SendCloud API</Description>
@@ -15,7 +15,7 @@
 		<PackageProjectUrl>https://github.com/janssenr/SendCloudApi.Net</PackageProjectUrl>
 		<PackageIcon>cropped-5-Sendcloud-App-Icon-1-192x192.png</PackageIcon>
 		<PackageTags>sendcloud postnl api rest data</PackageTags>
-		<PackageReleaseNotes>Added Quantity property on CreateParcel to support multi-collo shipments</PackageReleaseNotes>
+		<PackageReleaseNotes>Added ShippingFunctionalities and ShippingProducts and isReturn parameter for ShippingMethod</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net451'">
 		<Reference Include="System.Net.Http" />

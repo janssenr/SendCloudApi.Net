@@ -10,7 +10,7 @@ namespace SendCloudApi.Net.Resources
         {
             Resource = "shipping-price";
             ListResource = "";
-            SingleResource = "shipping-price";
+            SingleResource = "";
             CreateRequest = false;
             UpdateRequest = false;
         }
