@@ -80,7 +80,7 @@ namespace SendCloudApi.Net.Models
         public string ShipmentUuid { get; set; }
 
         [DataMember(Name = "shipping_method", EmitDefaultValue = false, IsRequired = false)]
-        public int ShippingMethodId { get; set; }
+        public int? ShippingMethodId { get; set; }
 
         [DataMember(Name = "shipping_method_checkout_name", EmitDefaultValue = false, IsRequired = false)]
         public string ShippingMethodCheckoutName { get; set; }
