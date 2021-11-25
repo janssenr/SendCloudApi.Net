@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace SendCloudApi.Net.Models
 {
@@ -42,6 +43,9 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "email", EmitDefaultValue = false, IsRequired = false)]
         public string Email { get; set; }
+
+        [DataMember(Name = "errors", EmitDefaultValue = false, IsRequired = false)]
+        public Dictionary<string, List<string>> Errors { get; set; }
 
         [DataMember(Name = "external_order_id", EmitDefaultValue = false, IsRequired = false)]
         public string ExternalOrderId { get; set; }
