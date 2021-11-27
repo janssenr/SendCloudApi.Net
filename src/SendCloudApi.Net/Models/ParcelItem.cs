@@ -28,7 +28,7 @@ namespace SendCloudApi.Net.Models
         public string ProductId { get; set; }
 
         [DataMember(Name = "properties", EmitDefaultValue = false, IsRequired = false)]
-        public Dictionary<string, string> Properties { get; set; }
+        public Dictionary<string, object> Properties { get; set; }
 
         [DataMember(Name = "sku", EmitDefaultValue = false, IsRequired = false)]
         public string StockKeepingUnit { get; set; }
