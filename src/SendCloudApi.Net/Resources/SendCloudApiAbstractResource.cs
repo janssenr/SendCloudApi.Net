@@ -24,16 +24,16 @@ namespace SendCloudApi.Net.Resources
             Authorization = client.GetBasicAuth();
         }
 
-        protected async Task<T> Create<T>(string data)
+        protected async Task<ApiResponse<T>> Create<T>(string data)
         {
             if (CreateRequest)
             {
                 return await Client.Create<T>($"{HostUrl}{CreateResource}", Authorization, data, SingleResource, DateTimeFormat);
             }
-            return default(T);
+            return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }
 
-        protected async Task<T> Get<T>(int? objectId = null, Dictionary<string, string> parameters = null)
+        protected async Task<ApiResponse<T>> Get<T>(int? objectId = null, Dictionary<string, string> parameters = null)
         {
             if (GetRequest)
             {
@@ -43,10 +43,10 @@ namespace SendCloudApi.Net.Resources
                 }
                 return await Client.Get<T>($"{HostUrl}{Resource}", Authorization, parameters, ListResource, DateTimeFormat);
             }
-            return default(T);
+            return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }
 
-        protected async Task<T> Update<T>(string data, int? objectId = null)
+        protected async Task<ApiResponse<T>> Update<T>(string data, int? objectId = null)
         {
             if (UpdateRequest)
             {
@@ -56,7 +56,7 @@ namespace SendCloudApi.Net.Resources
                 }
                 return await Client.Update<T>($"{HostUrl}{UpdateResource}", Authorization, data, SingleResource, DateTimeFormat);
             }
-            return default(T);
+            return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }
 
         //protected async Task<string> Download<T>(string url)

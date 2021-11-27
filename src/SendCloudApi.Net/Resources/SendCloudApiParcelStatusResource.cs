@@ -16,7 +16,8 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<Status[]> Get()
         {
-            return await Get<Status[]>();
+            var apiResponse = await Get<Status[]>();
+            return apiResponse.Data;
         }
     }
 }

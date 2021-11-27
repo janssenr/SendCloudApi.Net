@@ -20,15 +20,23 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<Integration[]> Get()
         {
-            return await Get<Integration[]>();
+            var apiResponse = await Get<Integration[]>();
+            return apiResponse.Data;
         }
 
         public async Task<Integration> Update(Integration integration)
         {
-            return await Update<Integration>(JsonHelper.Serialize(integration, DateTimeFormat), integration.Id);
+            var apiResponse = await Update<Integration>(JsonHelper.Serialize(integration, DateTimeFormat), integration.Id);
+            return apiResponse.Data;
         }
 
         public async Task<Shipment[]> GetShipments(int integrationId, int[] externalOrderIds = null, int[]externalShipmentIds = null, string orderNumber = null, DateTime? startDate = null, DateTime? endDate = null, int? senderAddressId = null)
+        {
+            var apiResponse = await GetShipmentsWithHttpInfo(integrationId, externalOrderIds, externalShipmentIds, orderNumber, startDate, endDate, senderAddressId);
+            return apiResponse.Data;
+        }
+
+        public async Task<ApiResponse<Shipment[]>> GetShipmentsWithHttpInfo(int integrationId, int[] externalOrderIds = null, int[] externalShipmentIds = null, string orderNumber = null, DateTime? startDate = null, DateTime? endDate = null, int? senderAddressId = null)
         {
             var parameters = new Dictionary<string, string>();
             if (externalOrderIds != null && externalOrderIds.Length > 0)
@@ -45,21 +53,24 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("sender_address ", senderAddressId.Value.ToString());
 
             string url = $"{HostUrl}integrations/{integrationId}/shipments";
-            return await Client.Get<Shipment[]>(url, Authorization, parameters, "results", "yyyy-MM-ddTHH:mm:ss.FFFFFFZ");
+            var apiResponse = await Client.Get<Shipment[]>(url, Authorization, parameters, "results", "yyyy-MM-ddTHH:mm:ss.FFFFFFZ");
+            return apiResponse;
         }
 
         public async Task<Shipment[]> InsertShipments(int integrationId, Shipment[] shipments)
         {
             string url = $"{HostUrl}integrations/{integrationId}/shipments";
             string data = JsonHelper.Serialize(shipments, DateTimeFormat);
-            return await Client.Create<Shipment[]>(url, Authorization, data, "", DateTimeFormat);
+            var apiResponse = await Client.Create<Shipment[]>(url, Authorization, data, "", DateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<string> DeleteShipment(int integrationId, Shipment shipment)
         {
             string url = $"{HostUrl}integrations/{integrationId}/shipments/delete";
             string data = JsonHelper.Serialize(shipment, DateTimeFormat);
-            return await Client.Create<string>(url, Authorization, data, "", DateTimeFormat);
+            var apiResponse = await Client.Create<string>(url, Authorization, data, "", DateTimeFormat);
+            return apiResponse.Data;
         }
     }
 }

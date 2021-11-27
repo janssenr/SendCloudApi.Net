@@ -51,7 +51,8 @@ namespace SendCloudApi.Net.Resources
             }
             if (leadTimeHours.HasValue)
                 parameters.Add("lead_time_hours", leadTimeHours.ToString());
-            return await Get<ShippingProduct[]>(parameters: parameters);
+            var apiResponse = await Get<ShippingProduct[]>(parameters: parameters);
+            return apiResponse.Data;
         }
     }
 }

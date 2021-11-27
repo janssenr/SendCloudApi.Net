@@ -24,7 +24,8 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("language", language);
 
             string url = $"{_hostUrl}brand/{domain}/return-portal/";
-            return await _client.Get<Portal>(url, "", parameters, "portal", _dateTimeFormat);
+            var apiResponse = await _client.Get<Portal>(url, "", parameters, "portal", _dateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<ServicePoint[]> GetServicePoints(string accessToken, string country, string latitude = null, string longitude = null, string radius = null, string pageSize = null, string[] carriers = null)
@@ -46,7 +47,8 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("carrier", string.Join(",", carriers));
 
             string url = "https://servicepoints.sendcloud.sc/api/v2/service-points/";
-            return await _client.Get<ServicePoint[]>(url, "", parameters, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<ServicePoint[]>(url, "", parameters, "", _dateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<OutgoingParcel> GetOutgoingParcel(string domain, string postalCode, string identifier)
@@ -58,7 +60,8 @@ namespace SendCloudApi.Net.Resources
             };
 
             string url = $"{_hostUrl}brand/{domain}/return-portal/outgoing/";
-            return await _client.Get<OutgoingParcel>(url, "", parameters, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<OutgoingParcel>(url, "", parameters, "", _dateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<ReturnParcelResponse> CreateReturnParcel(string domain, string accessToken, ReturnParcel returnParcel)
@@ -66,12 +69,14 @@ namespace SendCloudApi.Net.Resources
             string url = $"{_hostUrl}brand/{domain}/return-portal/incoming/";
             string authorization = $"Bearer {accessToken}";
             string data = JsonHelper.Serialize(returnParcel, "");
-            return await _client.Create<ReturnParcelResponse>(url, authorization, data, "", _dateTimeFormat);
+            var apiResponse = await _client.Create<ReturnParcelResponse>(url, authorization, data, "", _dateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<string> GetLabelPolling(string url)
         {
-            return await _client.Get<string>(url, "", null, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<string>(url, "", null, "", _dateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<byte[]> GetLabelDownload(string url)

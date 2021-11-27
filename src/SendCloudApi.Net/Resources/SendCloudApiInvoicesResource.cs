@@ -17,12 +17,14 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<Invoice<string>[]> Get()
         {
-            return await Get<Invoice<string>[]>();
+            var apiResponse = await Get<Invoice<string>[]>();
+            return apiResponse.Data;
         }
 
         public async Task<Invoice<InvoiceItem[]>> Get(int invoiceId)
         {
-            return await Get<Invoice<InvoiceItem[]>>(invoiceId);
+            var apiResponse = await Get<Invoice<InvoiceItem[]>>(invoiceId);
+            return apiResponse.Data;
         }
     }
 }

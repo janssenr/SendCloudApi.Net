@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SendCloudApi.Net.Resources
 {
-    public class SendCloudApiBrandsResource: SendCloudApiAbstractResource
+    public class SendCloudApiBrandsResource : SendCloudApiAbstractResource
     {
         public SendCloudApiBrandsResource(SendCloudApi client) : base(client)
         {
@@ -16,12 +16,14 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<Brand[]> Get()
         {
-            return await Get<Brand[]>();
+            var apiResponse = await Get<Brand[]>();
+            return apiResponse.Data;
         }
 
         public async Task<Brand> Get(int brandId)
         {
-            return await Get<Brand>(brandId);
+            var apiResponse = await Get<Brand>(brandId);
+            return apiResponse.Data;
         }
     }
 }

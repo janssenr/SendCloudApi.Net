@@ -84,17 +84,17 @@ namespace SendCloudApi.Net
             return $"AccessToken {_apiKey}";
         }
 
-        internal async Task<T> Create<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
+        internal async Task<ApiResponse<T>> Create<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
         {
             return await SendRequest<T>(url, authorization, "POST", null, data, returnObject, dateTimeFormat);
         }
 
-        internal async Task<T> Get<T>(string url, string authorization, Dictionary<string, string> parameters, string returnObject, string dateTimeFormat)
+        internal async Task<ApiResponse<T>> Get<T>(string url, string authorization, Dictionary<string, string> parameters, string returnObject, string dateTimeFormat)
         {
             return await SendRequest<T>(url, authorization, "GET", parameters, null, returnObject, dateTimeFormat);
         }
 
-        internal async Task<T> Update<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
+        internal async Task<ApiResponse<T>> Update<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
         {
             return await SendRequest<T>(url, authorization, "PUT", null, data, returnObject, dateTimeFormat);
         }
@@ -117,7 +117,7 @@ namespace SendCloudApi.Net
             return new Uri(url);
         }
 
-        private async Task<T> SendRequest<T>(string url, string authorization, string method, Dictionary<string, string> parameters, string data, string returnObject, string dateTimeFormat)
+        private async Task<ApiResponse<T>> SendRequest<T>(string url, string authorization, string method, Dictionary<string, string> parameters, string data, string returnObject, string dateTimeFormat)
         {
             var httpClient = new HttpClient();
             if (!string.IsNullOrWhiteSpace(authorization))
@@ -161,12 +161,12 @@ namespace SendCloudApi.Net
                 if (!string.IsNullOrWhiteSpace(returnObject))
                 {
                     Dictionary<string, T> result = JsonHelper.DeserializeAsDictionary<T>(jsonResult, dateTimeFormat);
-                    return result[returnObject];
+                    return new ApiResponse<T>(response.StatusCode, result[returnObject], jsonResult);;
                 }
-                return JsonHelper.Deserialize<T>(jsonResult, dateTimeFormat);
+                return new ApiResponse<T>(response.StatusCode, JsonHelper.Deserialize<T>(jsonResult, dateTimeFormat), jsonResult);
             }
             await HandleResponseError(response);
-            return default(T);
+            return new ApiResponse<T>(response.StatusCode, default(T));
         }
 
         private async Task HandleResponseError(HttpResponseMessage response)

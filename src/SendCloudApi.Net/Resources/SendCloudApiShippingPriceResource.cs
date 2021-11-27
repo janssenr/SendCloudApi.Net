@@ -23,7 +23,8 @@ namespace SendCloudApi.Net.Resources
             parameters.Add("to_country", toCountry);
             parameters.Add("weight", weight.ToString());
             parameters.Add("weight_unit", weightUnit);
-            return await Get<ShippingPrice>(parameters: parameters);
+            var apiResponse = await Get<ShippingPrice>(parameters: parameters);
+            return apiResponse.Data;
         }
     }
 }

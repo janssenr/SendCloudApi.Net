@@ -19,7 +19,8 @@ namespace SendCloudApi.Net.Resources
         {
             string url = $"{_hostUrl}carriers/";
             string authorization = _client.GetBasicAuth();
-            return await _client.Get<string[]>(url, authorization, null, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<string[]>(url, authorization, null, "", _dateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<ServicePoint[]> GetServicePoints(string country, string[] carriers = null, string neLatitude = null, string neLongitude = null, string swLatitude = null, string swLongitude = null, string latitude = null, string longitude = null, string weight = null)
@@ -46,14 +47,16 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("weight", weight);
             string url = $"{_hostUrl}service-points/";
             string authorization = _client.GetBasicAuth();
-            return await _client.Get<ServicePoint[]>(url, authorization, parameters, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<ServicePoint[]>(url, authorization, parameters, "", _dateTimeFormat);
+            return apiResponse.Data;
         }
 
         public async Task<bool> IsServicePointAvailable(int servicePointId)
         {
             string url = $"{_hostUrl}service-points/{servicePointId}/check-availability/";
             string authorization = _client.GetBasicAuth();
-            return await _client.Get<bool>(url, authorization, null, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<bool>(url, authorization, null, "", _dateTimeFormat);
+            return apiResponse.Data;
         }
     }
 }

@@ -24,12 +24,14 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("service_point_id", servicePointId.ToString());
             if (isReturn.HasValue)
                 parameters.Add("is_return", isReturn.ToString());
-            return await Get<ShippingMethod[]>(parameters: parameters);
+            var apiResponse = await Get<ShippingMethod[]>(parameters: parameters);
+            return apiResponse.Data;
         }
 
         public async Task<ShippingMethod> Get(int shippingMethodId)
         {
-            return await Get<ShippingMethod>(shippingMethodId);
+            var apiResponse = await Get<ShippingMethod>(shippingMethodId);
+            return apiResponse.Data;
         }
     }
 }
