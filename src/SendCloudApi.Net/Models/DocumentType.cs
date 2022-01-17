@@ -36,7 +36,7 @@ namespace SendCloudApi.Net.Models
 
         public static DocumentType ToDocumentType(this string enumerationDescription)
         {
-            var type = typeof(DeliveryOption);
+            var type = typeof(DocumentType);
 
             foreach (DocumentType val in Enum.GetValues(typeof(DocumentType)))
                 if (val.ToStringExtended() == enumerationDescription)
