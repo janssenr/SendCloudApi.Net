@@ -99,6 +99,11 @@ namespace SendCloudApi.Net
             return await SendRequest<T>(url, authorization, "PUT", null, data, returnObject, dateTimeFormat);
         }
 
+        internal async Task<ApiResponse<T>> Delete<T>(string url, string authorization)
+        {
+            return await SendRequest<T>(url, authorization, "DELETE", null, null, null, null);
+        }
+
         internal Uri GetUrl(string url, Dictionary<string, string> parameters = null)
         {
             if (parameters != null && parameters.Any())
@@ -154,16 +159,25 @@ namespace SendCloudApi.Net
                         response = await httpClient.PutAsync(requestUri, content).ConfigureAwait(false);
                     }
                     break;
+                case "DELETE":
+                    {
+                        response = await httpClient.DeleteAsync(requestUri).ConfigureAwait(false);
+                    }
+                    break;
             }
             if (response.IsSuccessStatusCode)
             {
                 var jsonResult = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (!string.IsNullOrWhiteSpace(returnObject))
+                if (!string.IsNullOrEmpty(jsonResult))
                 {
-                    Dictionary<string, T> result = JsonHelper.DeserializeAsDictionary<T>(jsonResult, dateTimeFormat);
-                    return new ApiResponse<T>(response.StatusCode, result[returnObject], jsonResult);;
+                    if (!string.IsNullOrWhiteSpace(returnObject))
+                    {
+                        Dictionary<string, T> result = JsonHelper.DeserializeAsDictionary<T>(jsonResult, dateTimeFormat);
+                        return new ApiResponse<T>(response.StatusCode, result[returnObject], jsonResult); ;
+                    }
+                    return new ApiResponse<T>(response.StatusCode, JsonHelper.Deserialize<T>(jsonResult, dateTimeFormat), jsonResult);
                 }
-                return new ApiResponse<T>(response.StatusCode, JsonHelper.Deserialize<T>(jsonResult, dateTimeFormat), jsonResult);
+                return new ApiResponse<T>(response.StatusCode, default(T));
             }
             await HandleResponseError(response);
             return new ApiResponse<T>(response.StatusCode, default(T));

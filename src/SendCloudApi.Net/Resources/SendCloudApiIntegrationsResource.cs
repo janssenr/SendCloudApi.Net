@@ -15,6 +15,7 @@ namespace SendCloudApi.Net.Resources
             ListResource = "";
             SingleResource = "";
             CreateRequest = false;
+            DeleteRequest = true;
             DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.FFFFFFzzz";
         }
 
@@ -28,6 +29,12 @@ namespace SendCloudApi.Net.Resources
         {
             var apiResponse = await Update<Integration>(JsonHelper.Serialize(integration, DateTimeFormat), integration.Id);
             return apiResponse.Data;
+        }
+
+        public async Task<ApiResponse<Integration>> Delete(int integrationId)
+        {
+            var apiResponse = await Delete<Integration>(integrationId);
+            return apiResponse;
         }
 
         public async Task<Shipment[]> GetShipments(int integrationId, int[] externalOrderIds = null, int[]externalShipmentIds = null, string orderNumber = null, DateTime? startDate = null, DateTime? endDate = null, int? senderAddressId = null)
@@ -46,9 +53,9 @@ namespace SendCloudApi.Net.Resources
             if (!string.IsNullOrWhiteSpace(orderNumber))
                 parameters.Add("order_number", orderNumber);
             if (startDate.HasValue)
-                parameters.Add("start_date ", startDate.Value.ToString("yyyy-MM-dd"));
+                parameters.Add("start_date", startDate.Value.ToString("yyyy-MM-dd"));
             if (endDate.HasValue)
-                parameters.Add("end_date ", endDate.Value.ToString("yyyy-MM-dd"));
+                parameters.Add("end_date", endDate.Value.ToString("yyyy-MM-dd"));
             if (senderAddressId.HasValue)
                 parameters.Add("sender_address ", senderAddressId.Value.ToString());
 

@@ -11,6 +11,7 @@ namespace SendCloudApi.Net.Resources
         protected bool CreateRequest = true;
         protected bool GetRequest = true;
         protected bool UpdateRequest = true;
+        protected bool DeleteRequest = false;
         protected string SingleResource = string.Empty;
         protected string ListResource = string.Empty;
         protected string CreateResource = string.Empty;
@@ -58,6 +59,16 @@ namespace SendCloudApi.Net.Resources
             }
             return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }
+
+        protected async Task<ApiResponse<T>> Delete<T>(int objectId)
+        {
+            if (DeleteRequest)
+            {
+                return await Client.Delete<T>($"{HostUrl}{Resource}/{objectId}", Authorization);
+            }
+            return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
+        }
+
 
         //protected async Task<string> Download<T>(string url)
         //{
