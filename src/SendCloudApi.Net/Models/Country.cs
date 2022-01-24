@@ -12,7 +12,7 @@ namespace SendCloudApi.Net.Models
         public string Name { get; set; }
 
         [DataMember(Name = "price", EmitDefaultValue = false, IsRequired = false)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [DataMember(Name = "iso_2", EmitDefaultValue = false, IsRequired = true)]
         public string Iso2 { get; set; }

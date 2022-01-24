@@ -26,7 +26,7 @@ namespace SendCloudApi.Net.Models
                 case DocumentType.CN23:
                     return "cn23";
                 case DocumentType.CommercialInvoice:
-                    return "commercial‑invoice";
+                    return "commercial-invoice";
                 case DocumentType.CN23Default:
                     return "cn23‑default";
                 default:
