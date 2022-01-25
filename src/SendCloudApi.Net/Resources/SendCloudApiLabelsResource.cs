@@ -11,7 +11,7 @@ namespace SendCloudApi.Net.Resources
         {
             Resource = "labels";
             ListResource = "label";
-            SingleResource = "label";
+            SingleResource = "";
             CreateResource = "label";
             CreateRequest = true;
         }
@@ -26,8 +26,8 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<Label> Get(int parcelId)
         {
-            var apiResponse = await Get<Label>(parcelId);
-            return apiResponse.Data;
+            var apiResponse = await Get<DataWrapper>(parcelId);
+            return apiResponse.Data.Label;
         }
 
         //public async Task<string> Download(string url)
