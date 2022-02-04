@@ -4,6 +4,10 @@ An unofficial client for the SendCloud API. More info about SendCloud on http://
 
 Full docs of the SendCloud API can be found on https://docs.sendcloud.sc/api/v2/index.html
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/janssenr/SendCloudApi.Net/master/LICENSE)
+[![Twitter URL](https://img.shields.io/badge/twitter-follow-1da1f2.svg)](https://twitter.com/janssenr)
+[![Donate](https://img.shields.io/badge/%24-donate-ff00ff.svg)](https://www.paypal.me/janssenr)
+
 ## Installation
 This project can easily be installed through NuGet.
 ```
