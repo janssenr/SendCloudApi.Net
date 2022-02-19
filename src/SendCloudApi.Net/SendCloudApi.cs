@@ -173,7 +173,7 @@ namespace SendCloudApi.Net
                     if (!string.IsNullOrWhiteSpace(returnObject))
                     {
                         Dictionary<string, T> result = JsonHelper.DeserializeAsDictionary<T>(jsonResult, dateTimeFormat);
-                        return new ApiResponse<T>(response.StatusCode, result[returnObject], jsonResult); ;
+                        return new ApiResponse<T>(response.StatusCode, result[returnObject], jsonResult);
                     }
                     return new ApiResponse<T>(response.StatusCode, JsonHelper.Deserialize<T>(jsonResult, dateTimeFormat), jsonResult);
                 }

@@ -15,7 +15,7 @@ namespace SendCloudApi.Net.Resources
             UpdateRequest = false;
         }
 
-        public async Task<ShippingPrice> Get(int shippingMethodId, string fromCountry, string toCountry, int weight, string weightUnit)
+        public async Task<ShippingPrice[]> Get(int shippingMethodId, string fromCountry, string toCountry, int weight, string weightUnit)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("shipping_method_id", shippingMethodId.ToString());
@@ -23,7 +23,7 @@ namespace SendCloudApi.Net.Resources
             parameters.Add("to_country", toCountry);
             parameters.Add("weight", weight.ToString());
             parameters.Add("weight_unit", weightUnit);
-            var apiResponse = await Get<ShippingPrice>(parameters: parameters);
+            var apiResponse = await Get<ShippingPrice[]>(parameters: parameters);
             return apiResponse.Data;
         }
     }
