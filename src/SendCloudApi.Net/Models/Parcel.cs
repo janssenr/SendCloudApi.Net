@@ -30,6 +30,12 @@ namespace SendCloudApi.Net.Models
         [DataMember(Name = "date_created", EmitDefaultValue = false, IsRequired = false)]
         public DateTime DateCreated { get; set; }
 
+        [DataMember(Name = "date_announced", EmitDefaultValue = false, IsRequired = false)]
+        public DateTime DateAnnounced { get; set; }
+
+        [DataMember(Name = "date_updated", EmitDefaultValue = false, IsRequired = false)]
+        public DateTime DateUpdated { get; set; }
+
         [DataMember(Name = "email", EmitDefaultValue = false, IsRequired = false)]
         public string Email { get; set; }
 
@@ -119,6 +125,36 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "total_order_value_currency", EmitDefaultValue = false, IsRequired = false)]
         public string TotalOrderValueCurrency { get; set; }
+
+        [DataMember(Name = "colli_tracking_number", EmitDefaultValue = false, IsRequired = false)]
+        public string ColliTrackingNumber { get; set; }
+
+        [DataMember(Name = "colli_uuid", EmitDefaultValue = false, IsRequired = false)]
+        public Guid ColliUuid { get; set; }
+
+        [DataMember(Name = "collo_nr", EmitDefaultValue = false, IsRequired = false)]
+        public int ColloNr { get; set; }
+
+        [DataMember(Name = "collo_count", EmitDefaultValue = false, IsRequired = false)]
+        public int ColloCount { get; set; }
+
+        [DataMember(Name = "awb_tracking_number", EmitDefaultValue = false, IsRequired = false)]
+        public string AwbTrackingNumber { get; set; }
+
+        [DataMember(Name = "box_number", EmitDefaultValue = false, IsRequired = false)]
+        public int? BoxNumber { get; set; }
+
+        [DataMember(Name = "length", EmitDefaultValue = false, IsRequired = false)]
+        public string Length { get; set; }
+
+        [DataMember(Name = "width", EmitDefaultValue = false, IsRequired = false)]
+        public string Width { get; set; }
+
+        [DataMember(Name = "height", EmitDefaultValue = false, IsRequired = false)]
+        public string Height { get; set; }
+
+        [DataMember(Name = "shipping_method_checkout_name", EmitDefaultValue = false, IsRequired = false)]
+        public string ShippingMethodCheckoutName { get; set; }
 
         [DataMember(Name = "carrier", EmitDefaultValue = false, IsRequired = false)]
         public Carrier Carrier { get; set; }
