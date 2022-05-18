@@ -37,13 +37,13 @@ namespace SendCloudApi.Net.Resources
             return apiResponse;
         }
 
-        public async Task<Shipment[]> GetShipments(int integrationId, int[] externalOrderIds = null, int[]externalShipmentIds = null, string orderNumber = null, DateTime? startDate = null, DateTime? endDate = null, int? senderAddressId = null)
+        public async Task<Shipment[]> GetShipments(int integrationId, string[] externalOrderIds = null, string[]externalShipmentIds = null, string orderNumber = null, DateTime? startDate = null, DateTime? endDate = null, int? senderAddressId = null, bool? shippingRules = false)
         {
-            var apiResponse = await GetShipmentsWithHttpInfo(integrationId, externalOrderIds, externalShipmentIds, orderNumber, startDate, endDate, senderAddressId);
+            var apiResponse = await GetShipmentsWithHttpInfo(integrationId, externalOrderIds, externalShipmentIds, orderNumber, startDate, endDate, senderAddressId, shippingRules);
             return apiResponse.Data;
         }
 
-        public async Task<ApiResponse<Shipment[]>> GetShipmentsWithHttpInfo(int integrationId, int[] externalOrderIds = null, int[] externalShipmentIds = null, string orderNumber = null, DateTime? startDate = null, DateTime? endDate = null, int? senderAddressId = null)
+        public async Task<ApiResponse<Shipment[]>> GetShipmentsWithHttpInfo(int integrationId, string[] externalOrderIds = null, string[] externalShipmentIds = null, string orderNumber = null, DateTime? startDate = null, DateTime? endDate = null, int? senderAddressId = null, bool? shippingRules = false)
         {
             var parameters = new Dictionary<string, string>();
             if (externalOrderIds != null && externalOrderIds.Length > 0)
@@ -57,7 +57,9 @@ namespace SendCloudApi.Net.Resources
             if (endDate.HasValue)
                 parameters.Add("end_date", endDate.Value.ToString("yyyy-MM-dd"));
             if (senderAddressId.HasValue)
-                parameters.Add("sender_address ", senderAddressId.Value.ToString());
+                parameters.Add("sender_address", senderAddressId.Value.ToString());
+            if (shippingRules.HasValue)
+                parameters.Add("shipping_rules", shippingRules.Value.ToString().ToLowerInvariant());
 
             string url = $"{HostUrl}integrations/{integrationId}/shipments";
             var apiResponse = await Client.Get<Shipment[]>(url, Authorization, parameters, "results", "yyyy-MM-ddTHH:mm:ss.FFFFFFZ");

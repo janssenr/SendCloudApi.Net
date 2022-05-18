@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Collections.Generic;
 
 namespace SendCloudApi.Net.Models
 {
@@ -43,9 +42,6 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "email", EmitDefaultValue = false, IsRequired = false)]
         public string Email { get; set; }
-
-        [DataMember(Name = "errors", EmitDefaultValue = false, IsRequired = false)]
-        public Dictionary<string, List<string>> Errors { get; set; }
 
         [DataMember(Name = "external_order_id", EmitDefaultValue = false, IsRequired = false)]
         public string ExternalOrderId { get; set; }
@@ -109,5 +105,17 @@ namespace SendCloudApi.Net.Models
 
         [DataMember(Name = "weight", EmitDefaultValue = false, IsRequired = false)]
         public double Weight { get; set; }
+
+        [DataMember(Name = "width", EmitDefaultValue = false, IsRequired = false)]
+        public string Width { get; set; }
+
+        [DataMember(Name = "height", EmitDefaultValue = false, IsRequired = false)]
+        public string Height { get; set; }
+
+        [DataMember(Name = "length", EmitDefaultValue = false, IsRequired = false)]
+        public string Length { get; set; }
+
+        //[DataMember(Name = "errors", EmitDefaultValue = false, IsRequired = false)]
+        //public Dictionary<string, List<string>> Errors { get; set; }
     }
 }
