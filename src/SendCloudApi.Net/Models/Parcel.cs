@@ -31,10 +31,10 @@ namespace SendCloudApi.Net.Models
         public DateTime DateCreated { get; set; }
 
         [DataMember(Name = "date_announced", EmitDefaultValue = false, IsRequired = false)]
-        public DateTime DateAnnounced { get; set; }
+        public DateTime? DateAnnounced { get; set; }
 
         [DataMember(Name = "date_updated", EmitDefaultValue = false, IsRequired = false)]
-        public DateTime DateUpdated { get; set; }
+        public DateTime? DateUpdated { get; set; }
 
         [DataMember(Name = "email", EmitDefaultValue = false, IsRequired = false)]
         public string Email { get; set; }

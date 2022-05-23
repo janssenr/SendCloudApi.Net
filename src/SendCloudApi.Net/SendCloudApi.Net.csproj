@@ -6,7 +6,7 @@
 		<TargetFramework>net451</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>SendCloudApi</PackageId>
-		<Version>2.0.21</Version>
+		<Version>2.0.22</Version>
 		<Authors>Rob Janssen</Authors>
 		<Company />
 		<Description>A C#/.net wrapper for the SendCloud API</Description>
@@ -15,7 +15,7 @@
 		<PackageProjectUrl>https://github.com/janssenr/SendCloudApi.Net</PackageProjectUrl>
 		<PackageIcon>cropped-5-Sendcloud-App-Icon-1-192x192.png</PackageIcon>
 		<PackageTags>sendcloud postnl api rest data</PackageTags>
-		<PackageReleaseNotes>Removed the Shipment.Errors property and added ShippingRules parameter for GetShipments</PackageReleaseNotes>
+		<PackageReleaseNotes>Make DateAnnounced and DateUpdated Nullable</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net451'">
 		<Reference Include="System.Net.Http" />
