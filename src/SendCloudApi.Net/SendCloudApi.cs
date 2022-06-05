@@ -191,6 +191,9 @@ namespace SendCloudApi.Net
                 case HttpStatusCode.NotFound:
                     message = "Page not found";
                     break;
+                case HttpStatusCode.InternalServerError:
+                    message = "Internal server error";
+                    break;
                 default:
                     var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var result = JsonHelper.Deserialize<SendCloudError>(responseBody, "yyyy-MM-dd HH:mm:ss");
