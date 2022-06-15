@@ -17,7 +17,7 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<Box> Finalize(Box box)
         {
-            var apiResponse = await Client.Create<Box>($"{HostUrl}{Resource}/finalize", Authorization, JsonHelper.Serialize(box, DateTimeFormat), string.Empty, DateTimeFormat);
+            var apiResponse = await Client.Create<Box>($"{HostUrl}{Resource}/finalize", Authorization, JsonHelper.Serialize(box, DateTimeFormat), string.Empty, DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
     }

@@ -8,6 +8,7 @@ namespace SendCloudApi.Net.Resources
         protected readonly SendCloudApi Client;
         protected string HostUrl = "https://panel.sendcloud.sc/api/v2/";
         protected string Authorization;
+        protected bool Verbose;
         protected bool CreateRequest = true;
         protected bool GetRequest = true;
         protected bool UpdateRequest = true;
@@ -23,13 +24,14 @@ namespace SendCloudApi.Net.Resources
         {
             Client = client;
             Authorization = client.GetBasicAuth();
+            Verbose = client.GetVerbose();
         }
 
         protected async Task<ApiResponse<T>> Create<T>(string data)
         {
             if (CreateRequest)
             {
-                return await Client.Create<T>($"{HostUrl}{CreateResource}", Authorization, data, SingleResource, DateTimeFormat);
+                return await Client.Create<T>($"{HostUrl}{CreateResource}", Authorization, data, SingleResource, DateTimeFormat, Verbose);
             }
             return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }
@@ -40,9 +42,9 @@ namespace SendCloudApi.Net.Resources
             {
                 if (objectId.HasValue)
                 {
-                    return await Client.Get<T>($"{HostUrl}{Resource}/{objectId.Value}", Authorization, parameters, SingleResource, DateTimeFormat);
+                    return await Client.Get<T>($"{HostUrl}{Resource}/{objectId.Value}", Authorization, parameters, SingleResource, DateTimeFormat, Verbose);
                 }
-                return await Client.Get<T>($"{HostUrl}{Resource}", Authorization, parameters, ListResource, DateTimeFormat);
+                return await Client.Get<T>($"{HostUrl}{Resource}", Authorization, parameters, ListResource, DateTimeFormat, Verbose);
             }
             return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }
@@ -53,9 +55,9 @@ namespace SendCloudApi.Net.Resources
             {
                 if (objectId.HasValue)
                 {
-                    return await Client.Update<T>($"{HostUrl}{UpdateResource}/{objectId.Value}", Authorization, data, SingleResource, DateTimeFormat);
+                    return await Client.Update<T>($"{HostUrl}{UpdateResource}/{objectId.Value}", Authorization, data, SingleResource, DateTimeFormat, Verbose);
                 }
-                return await Client.Update<T>($"{HostUrl}{UpdateResource}", Authorization, data, SingleResource, DateTimeFormat);
+                return await Client.Update<T>($"{HostUrl}{UpdateResource}", Authorization, data, SingleResource, DateTimeFormat, Verbose);
             }
             return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }
@@ -64,7 +66,7 @@ namespace SendCloudApi.Net.Resources
         {
             if (DeleteRequest)
             {
-                return await Client.Delete<T>($"{HostUrl}{Resource}/{objectId}", Authorization);
+                return await Client.Delete<T>($"{HostUrl}{Resource}/{objectId}", Authorization, Verbose);
             }
             return new ApiResponse<T>(System.Net.HttpStatusCode.MethodNotAllowed, default(T));
         }

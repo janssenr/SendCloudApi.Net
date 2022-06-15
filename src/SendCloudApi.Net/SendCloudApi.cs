@@ -17,6 +17,7 @@ namespace SendCloudApi.Net
         private readonly string _apiKey;
         private readonly string _apiSecret;
         private readonly string _partnerUuid;
+        private readonly bool _verbose = false;
         public readonly SendCloudApiParcelsResource Parcels;
         public readonly SendCloudApiParcelDocumentsResource ParcelDocuments;
         public readonly SendCloudApiParcelStatusResource ParcelStatuses;
@@ -35,7 +36,7 @@ namespace SendCloudApi.Net
         public readonly SendCloudApiShippingProductsResource ShippingProducts;
         public readonly SendCloudApiBoxResource Box;
 
-        public SendCloudApi(string apiKey, string apiSecret, string partnerUuid = null)
+        public SendCloudApi(string apiKey, string apiSecret, string partnerUuid = null, bool verbose = false)
         {
             if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrWhiteSpace(apiSecret))
             {
@@ -45,6 +46,7 @@ namespace SendCloudApi.Net
             _apiKey = apiKey;
             _apiSecret = apiSecret;
             _partnerUuid = partnerUuid;
+            _verbose = verbose;
             Parcels = new SendCloudApiParcelsResource(this);
             ParcelDocuments = new SendCloudApiParcelDocumentsResource(this);
             ParcelStatuses = new SendCloudApiParcelStatusResource(this);
@@ -84,24 +86,29 @@ namespace SendCloudApi.Net
             return $"AccessToken {_apiKey}";
         }
 
-        internal async Task<ApiResponse<T>> Create<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
+        internal bool GetVerbose()
         {
-            return await SendRequest<T>(url, authorization, "POST", null, data, returnObject, dateTimeFormat);
+            return _verbose;
         }
 
-        internal async Task<ApiResponse<T>> Get<T>(string url, string authorization, Dictionary<string, string> parameters, string returnObject, string dateTimeFormat)
+        internal async Task<ApiResponse<T>> Create<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat, bool verbose)
         {
-            return await SendRequest<T>(url, authorization, "GET", parameters, null, returnObject, dateTimeFormat);
+            return await SendRequest<T>(url, authorization, "POST", null, data, returnObject, dateTimeFormat, verbose);
         }
 
-        internal async Task<ApiResponse<T>> Update<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat)
+        internal async Task<ApiResponse<T>> Get<T>(string url, string authorization, Dictionary<string, string> parameters, string returnObject, string dateTimeFormat, bool verbose)
         {
-            return await SendRequest<T>(url, authorization, "PUT", null, data, returnObject, dateTimeFormat);
+            return await SendRequest<T>(url, authorization, "GET", parameters, null, returnObject, dateTimeFormat, verbose);
         }
 
-        internal async Task<ApiResponse<T>> Delete<T>(string url, string authorization)
+        internal async Task<ApiResponse<T>> Update<T>(string url, string authorization, string data, string returnObject, string dateTimeFormat, bool verbose)
         {
-            return await SendRequest<T>(url, authorization, "DELETE", null, null, null, null);
+            return await SendRequest<T>(url, authorization, "PUT", null, data, returnObject, dateTimeFormat, verbose);
+        }
+
+        internal async Task<ApiResponse<T>> Delete<T>(string url, string authorization, bool verbose)
+        {
+            return await SendRequest<T>(url, authorization, "DELETE", null, null, null, null, verbose);
         }
 
         internal Uri GetUrl(string url, Dictionary<string, string> parameters = null)
@@ -122,7 +129,7 @@ namespace SendCloudApi.Net
             return new Uri(url);
         }
 
-        private async Task<ApiResponse<T>> SendRequest<T>(string url, string authorization, string method, Dictionary<string, string> parameters, string data, string returnObject, string dateTimeFormat)
+        private async Task<ApiResponse<T>> SendRequest<T>(string url, string authorization, string method, Dictionary<string, string> parameters, string data, string returnObject, string dateTimeFormat, bool verbose)
         {
             var httpClient = new HttpClient();
             if (!string.IsNullOrWhiteSpace(authorization))
@@ -132,6 +139,11 @@ namespace SendCloudApi.Net
             if (!string.IsNullOrWhiteSpace(_partnerUuid))
             {
                 httpClient.DefaultRequestHeaders.Add("Sendcloud-Partner-Id", _partnerUuid);
+            }
+            
+            if (verbose)
+            {
+                parameters.Add("errors", "verbose-carrier");
             }
 
             var requestUri = GetUrl(url, parameters);

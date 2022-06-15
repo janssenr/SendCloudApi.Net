@@ -62,7 +62,7 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("shipping_rules", shippingRules.Value.ToString().ToLowerInvariant());
 
             string url = $"{HostUrl}integrations/{integrationId}/shipments";
-            var apiResponse = await Client.Get<Shipment[]>(url, Authorization, parameters, "results", "yyyy-MM-ddTHH:mm:ss.FFFFFFZ");
+            var apiResponse = await Client.Get<Shipment[]>(url, Authorization, parameters, "results", "yyyy-MM-ddTHH:mm:ss.FFFFFFZ", Verbose);
             return apiResponse;
         }
 
@@ -70,7 +70,7 @@ namespace SendCloudApi.Net.Resources
         {
             string url = $"{HostUrl}integrations/{integrationId}/shipments";
             string data = JsonHelper.Serialize(shipments, DateTimeFormat);
-            var apiResponse = await Client.Create<Shipment[]>(url, Authorization, data, "", DateTimeFormat);
+            var apiResponse = await Client.Create<Shipment[]>(url, Authorization, data, "", DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
 
@@ -78,7 +78,7 @@ namespace SendCloudApi.Net.Resources
         {
             string url = $"{HostUrl}integrations/{integrationId}/shipments/delete";
             string data = JsonHelper.Serialize(shipment, DateTimeFormat);
-            var apiResponse = await Client.Create<string>(url, Authorization, data, "", DateTimeFormat);
+            var apiResponse = await Client.Create<string>(url, Authorization, data, "", DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
     }

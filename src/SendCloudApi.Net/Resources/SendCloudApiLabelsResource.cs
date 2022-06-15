@@ -20,7 +20,7 @@ namespace SendCloudApi.Net.Resources
         {
             var label = new Label { ParcelIds = parcelIds };
             var wrapper = new DataWrapper { Label = label };
-            var apiResponse = await Client.Create<Label>(Resource, Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat);
+            var apiResponse = await Client.Create<Label>(Resource, Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
 

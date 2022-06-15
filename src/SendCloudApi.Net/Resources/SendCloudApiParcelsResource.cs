@@ -22,7 +22,7 @@ namespace SendCloudApi.Net.Resources
         public async Task<Parcel<Country>[]> BulkCreate(CreateParcel[] parcels)
         {
             var wrapper = new DataWrapper { Parcels = parcels };
-            var apiResponse = await Client.Create<Parcel<Country>[]>($"{HostUrl}{Resource}", Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat);
+            var apiResponse = await Client.Create<Parcel<Country>[]>($"{HostUrl}{Resource}", Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
 
@@ -67,13 +67,13 @@ namespace SendCloudApi.Net.Resources
 
         public async Task<ParcelCancel> Cancel(int parcelId)
         {
-            var apiResponse = await Client.Create<ParcelCancel>($"{HostUrl}{Resource}/{parcelId}/cancel", Authorization, string.Empty, string.Empty, DateTimeFormat);
+            var apiResponse = await Client.Create<ParcelCancel>($"{HostUrl}{Resource}/{parcelId}/cancel", Authorization, string.Empty, string.Empty, DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
 
         public async Task<string> GetReturnPortalUrl(int parcelId)
         {
-            var apiResponse = await Client.Get<string>($"{HostUrl}{Resource}/{parcelId}/return_portal_url", Authorization, null, "url", DateTimeFormat);
+            var apiResponse = await Client.Get<string>($"{HostUrl}{Resource}/{parcelId}/return_portal_url", Authorization, null, "url", DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
     }

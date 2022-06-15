@@ -9,6 +9,7 @@ namespace SendCloudApi.Net.Resources
         private readonly SendCloudApi _client;
         private readonly string _hostUrl = "https://servicepoints.sendcloud.sc/api/v2/";
         private readonly string _dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+        private readonly bool _verbose = false;
 
         public SendCloudApiServicePointsResource(SendCloudApi client)
         {
@@ -19,7 +20,7 @@ namespace SendCloudApi.Net.Resources
         {
             string url = $"{_hostUrl}carriers/";
             string authorization = _client.GetBasicAuth();
-            var apiResponse = await _client.Get<string[]>(url, authorization, null, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<string[]>(url, authorization, null, "", _dateTimeFormat, _verbose);
             return apiResponse.Data;
         }
 
@@ -47,7 +48,7 @@ namespace SendCloudApi.Net.Resources
                 parameters.Add("weight", weight);
             string url = $"{_hostUrl}service-points/";
             string authorization = _client.GetBasicAuth();
-            var apiResponse = await _client.Get<ServicePoint[]>(url, authorization, parameters, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<ServicePoint[]>(url, authorization, parameters, "", _dateTimeFormat, _verbose);
             return apiResponse.Data;
         }
 
@@ -55,7 +56,7 @@ namespace SendCloudApi.Net.Resources
         {
             string url = $"{_hostUrl}service-points/{servicePointId}/check-availability/";
             string authorization = _client.GetBasicAuth();
-            var apiResponse = await _client.Get<bool>(url, authorization, null, "", _dateTimeFormat);
+            var apiResponse = await _client.Get<bool>(url, authorization, null, "", _dateTimeFormat, _verbose);
             return apiResponse.Data;
         }
     }
