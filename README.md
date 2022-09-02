@@ -2,7 +2,7 @@
 
 An unofficial client for the SendCloud API. More info about SendCloud on http://sendcloud.nl. Below are some examples on the usage of this client.
 
-Full docs of the SendCloud API can be found on https://docs.sendcloud.sc/api/v2/index.html
+Full docs of the SendCloud API can be found on https://api.sendcloud.dev/docs/sendcloud-public-api/getting-started
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/janssenr/SendCloudApi.Net/master/LICENSE)
 [![Twitter URL](https://img.shields.io/badge/twitter-follow-1da1f2.svg)](https://twitter.com/janssenr)
@@ -47,6 +47,13 @@ var parcel = new CreateParcel
 	OrderNumber = "ORDER2014-52321",
 };
 var response = await client.Parcels.Create(parcel);
+```
+
+##Retrieve a PDF label
+```C#
+var url = "https://panel.sendcloud.sc/api/v2/labels/normal_printer/{id}";
+var label = await _api.Label.Download(url);
+File.WriteAllBytes("{path}", label);
 ```
 
 ## Exceptions
