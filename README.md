@@ -52,7 +52,7 @@ var response = await client.Parcels.Create(parcel);
 ##Retrieve a PDF label
 ```C#
 var url = "https://panel.sendcloud.sc/api/v2/labels/normal_printer/{id}";
-var label = await _api.Label.Download(url);
+var label = await client.Label.Download(url);
 File.WriteAllBytes("{path}", label);
 ```
 
