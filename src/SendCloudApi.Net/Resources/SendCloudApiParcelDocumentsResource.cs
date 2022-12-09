@@ -18,7 +18,7 @@ namespace SendCloudApi.Net.Resources
             if (!string.IsNullOrWhiteSpace(dpi))
                 parameters.Add("dpi", dpi);
 
-            Uri uri = Client.GetUrl($"{HostUrl}/parcels/{parcelId}/documents/{type}", parameters);
+            Uri uri = Client.GetUrl($"{HostUrl}parcels/{parcelId}/documents/{type}", parameters);
             return await Client.Download(uri.ToString());
         }
     }
