@@ -114,6 +114,7 @@ namespace SendCloudApi.Net
 
             if (verbose)
             {
+                if (parameters == null) parameters = new Dictionary<string, string>();
                 parameters.Add("errors", "verbose-carrier");
             }
 
