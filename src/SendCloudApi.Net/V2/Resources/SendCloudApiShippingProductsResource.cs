@@ -15,11 +15,12 @@ namespace SendCloudApi.Net.V2.Resources
             UpdateRequest = false;
         }
 
-        public async Task<ShippingProduct[]> Get(string fromCountry, string toCountry, Dictionary<string, string> functionalities = null, string carrier = null, int? weight = null, string weightUnit = null, int? length = null, string lengthUnit = null, int? width = null, string widthUnit = null, int? height = null, string heightUnit = null, int? leadTimeHours = null)
+        public async Task<ShippingProduct[]> Get(string fromCountry, string toCountry = null, Dictionary<string, string> functionalities = null, string carrier = null, int? weight = null, string weightUnit = null, int? length = null, string lengthUnit = null, int? width = null, string widthUnit = null, int? height = null, string heightUnit = null, int? leadTimeHours = null)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("from_country", fromCountry);
-            parameters.Add("to_country", toCountry);
+            if (!string.IsNullOrEmpty(toCountry))
+                parameters.Add("to_country", toCountry);
             if (functionalities != null)
             {
                 foreach (string key in functionalities.Keys)
