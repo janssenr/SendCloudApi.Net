@@ -52,7 +52,7 @@ namespace SendCloudApi.Net.V2.Models
         [DataMember(Name = "house_number", EmitDefaultValue = false, IsRequired = true)]
         public string HouseNumber { get; set; }
 
-        [DataMember(Name = "integration", EmitDefaultValue = false, IsRequired = true)]
+        [DataMember(Name = "integration", EmitDefaultValue = false, IsRequired = false)]
         public int IntegrationId { get; set; }
 
         [DataMember(Name = "name", EmitDefaultValue = false, IsRequired = false)]

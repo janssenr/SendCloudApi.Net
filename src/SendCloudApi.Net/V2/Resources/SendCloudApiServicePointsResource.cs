@@ -67,6 +67,14 @@ namespace SendCloudApi.Net.V2.Resources
             return apiResponse.Data;
         }
 
+        public async Task<ServicePoint> GetServicePoint(int servicePointId)
+        {
+            string url = $"{_hostUrl}service-points/{servicePointId}/";
+            string authorization = _client.GetBasicAuth();
+            var apiResponse = await _client.Get<ServicePoint>(url, authorization, null, "", _dateTimeFormat, _verbose);
+            return apiResponse.Data;
+        }
+
         public async Task<bool> IsServicePointAvailable(int servicePointId)
         {
             string url = $"{_hostUrl}service-points/{servicePointId}/check-availability/";
