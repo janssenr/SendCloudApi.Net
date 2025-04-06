@@ -128,6 +128,7 @@ namespace SendCloudApi.Net.V2.Models
         /// Customs invoice number
         /// </summary>
         [DataMember(Name = "customs_invoice_nr", EmitDefaultValue = false, IsRequired = false)]
+        [Obsolete("Deprecated in favor of the customs_information object.")]
         public string CustomsInvoiceNr { get; set; }
 
         /// <summary>
@@ -140,6 +141,7 @@ namespace SendCloudApi.Net.V2.Models
         /// Allowed values: 0 1 2 3 4
         /// </summary>
         [DataMember(Name = "customs_shipment_type", EmitDefaultValue = false, IsRequired = false)]
+        [Obsolete("Deprecated in favor of the customs_information object.")]
         public CustomsShipmentType? CustomsShipmentType { get; set; }
 
         /// <summary>
@@ -262,6 +264,9 @@ namespace SendCloudApi.Net.V2.Models
 
         [DataMember(Name = "tracking_url", EmitDefaultValue = false, IsRequired = false)]
         public string TrackingUrl { get; set; }
+
+        [DataMember(Name = "customs_information", EmitDefaultValue = false, IsRequired = false)]
+        public CustomsInformation CustomsInformation { get; set; }
     }
 
     [DataContract]

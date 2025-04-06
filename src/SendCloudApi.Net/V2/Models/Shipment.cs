@@ -34,9 +34,11 @@ namespace SendCloudApi.Net.V2.Models
         [DataMember(Name = "currency", EmitDefaultValue = false, IsRequired = false)]
         public string Currency { get; set; }
 
+        [Obsolete("Deprecated in favor of the customs_information object.")]
         [DataMember(Name = "customs_invoice_nr", EmitDefaultValue = false, IsRequired = false)]
         public string CustomsInvoiceNr { get; set; }
 
+        [Obsolete("Deprecated in favor of the customs_information object.")]
         [DataMember(Name = "customs_shipment_type", EmitDefaultValue = false, IsRequired = false)]
         public CustomsShipmentType? CustomsShipmentType { get; set; }
 
@@ -117,5 +119,8 @@ namespace SendCloudApi.Net.V2.Models
 
         //[DataMember(Name = "errors", EmitDefaultValue = false, IsRequired = false)]
         //public Dictionary<string, List<string>> Errors { get; set; }
+
+        [DataMember(Name = "customs_information", EmitDefaultValue = false, IsRequired = false)]
+        public CustomsInformation CustomsInformation { get; set; }
     }
 }
