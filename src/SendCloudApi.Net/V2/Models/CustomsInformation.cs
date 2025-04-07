@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.Serialization;
 
 namespace SendCloudApi.Net.V2.Models
@@ -10,13 +11,20 @@ namespace SendCloudApi.Net.V2.Models
         public string CustomsInvoiceNr { get; set; }
 
         [DataMember(Name = "customs_shipment_type", EmitDefaultValue = false, IsRequired = true)]
-        public int CustomsShipmentType { get; set; }
+        public CustomsShipmentType? CustomsShipmentType { get; set; }
 
         [DataMember(Name = "export_type", EmitDefaultValue = false, IsRequired = false)]
         public string ExportType { get; set; }
 
-        [DataMember(Name = "invoice_date", EmitDefaultValue = false, IsRequired = false)]
+        [IgnoreDataMember]
         public DateTime InvoiceDate { get; set; }
+
+        [DataMember(Name = "invoice_date", EmitDefaultValue = false, IsRequired = false)]
+        public string InvoiceDateFormatted
+        {
+            get => InvoiceDate.ToString("yyyy-MM-dd");
+            set => InvoiceDate = DateTime.ParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        }
 
         [DataMember(Name = "discount_granted", EmitDefaultValue = false, IsRequired = false)]
         public string DiscountGranted { get; set; }
@@ -43,6 +51,6 @@ namespace SendCloudApi.Net.V2.Models
         public TaxNumbers TaxNumbers { get; set; }
 
         [DataMember(Name = "return_data", EmitDefaultValue = false, IsRequired = false)]
-        public object ReturnData { get; set; }
+        public ReturnData ReturnData { get; set; }
     }
 }
