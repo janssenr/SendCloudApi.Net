@@ -17,13 +17,13 @@ namespace SendCloudApi.Net.V2.Models
         public string ExportType { get; set; }
 
         [IgnoreDataMember]
-        public DateTime InvoiceDate { get; set; }
+        public DateTime? InvoiceDate { get; set; }
 
         [DataMember(Name = "invoice_date", EmitDefaultValue = false, IsRequired = false)]
         public string InvoiceDateFormatted
         {
-            get => InvoiceDate.ToString("yyyy-MM-dd");
-            set => InvoiceDate = DateTime.ParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            get => InvoiceDate?.ToString("yyyy-MM-dd");
+            set => InvoiceDate = string.IsNullOrWhiteSpace(value) ? (DateTime?)null : DateTime.ParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
 
         [DataMember(Name = "discount_granted", EmitDefaultValue = false, IsRequired = false)]
