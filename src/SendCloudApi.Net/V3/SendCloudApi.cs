@@ -8,10 +8,12 @@ namespace SendCloudApi.Net.V3
     public class SendCloudApi : SendCloudApiBase
     {
         public readonly SendCloudApiReturnsResource Returns;
+		public readonly SendCloudApiShippingOptionResource ShippingOptions;
 
-        public SendCloudApi(string apiKey, string apiSecret, string partnerUuid = null, bool verbose = false) : base(apiKey, apiSecret, partnerUuid, verbose)
+		public SendCloudApi(string apiKey, string apiSecret, string partnerUuid = null, bool verbose = false) : base(apiKey, apiSecret, partnerUuid, verbose)
         {
             Returns = new SendCloudApiReturnsResource(this);
+            ShippingOptions = new SendCloudApiShippingOptionResource(this);
         }
 
         protected override string GetErrorMessage(string responseBody)
