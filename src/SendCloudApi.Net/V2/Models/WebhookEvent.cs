@@ -15,7 +15,7 @@ namespace SendCloudApi.Net.V2.Models
         public Integration Integration { get; set; }
 
         [DataMember(Name = "parcel", EmitDefaultValue = false, IsRequired = false)]
-        public Parcel<Country> Parcel { get; set; }
+        public ParcelStatusChanged Parcel { get; set; }
 
         [DataMember(Name = "refund", EmitDefaultValue = false, IsRequired = false)]
         public Refund Refund { get; set; }

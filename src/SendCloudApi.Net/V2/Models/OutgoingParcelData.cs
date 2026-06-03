@@ -6,7 +6,7 @@ namespace SendCloudApi.Net.V2.Models
     public class OutgoingParcelData
     {
         [DataMember(Name = "parcel", EmitDefaultValue = false, IsRequired = false)]
-        public Parcel<Country> Parcel { get; set; }
+        public Parcel Parcel { get; set; }
 
         [DataMember(Name = "products", EmitDefaultValue = false, IsRequired = false)]
         public OutgoingParcelProduct[] Products { get; set; }

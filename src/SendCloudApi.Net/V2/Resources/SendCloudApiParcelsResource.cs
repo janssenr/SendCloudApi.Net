@@ -19,21 +19,21 @@ namespace SendCloudApi.Net.V2.Resources
             DateTimeFormat = "dd-MM-yyyy HH:mm:ss";
         }
 
-        public async Task<Parcel<Country>[]> BulkCreate(CreateParcel[] parcels)
+        public async Task<Parcel[]> BulkCreate(CreateParcel[] parcels)
         {
             var wrapper = new DataWrapper { Parcels = parcels };
-            var apiResponse = await Client.Create<Parcel<Country>[]>($"{HostUrl}{Resource}", Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat, Verbose);
+            var apiResponse = await Client.Create<Parcel[]>($"{HostUrl}{Resource}", Authorization, JsonHelper.Serialize(wrapper, DateTimeFormat), ListResource, DateTimeFormat, Verbose);
             return apiResponse.Data;
         }
 
-        public async Task<Parcel<Country>> Create(CreateParcel parcel)
+        public async Task<Parcel> Create(CreateParcel parcel)
         {
             var wrapper = new DataWrapper { Parcel = parcel };
-            var apiResponse = await Create<Parcel<Country>>(JsonHelper.Serialize(wrapper, DateTimeFormat));
+            var apiResponse = await Create<Parcel>(JsonHelper.Serialize(wrapper, DateTimeFormat));
             return apiResponse.Data;
         }
 
-        public async Task<Parcel<Country>[]> Get(int? limit = null, int? offset = null, int? parcelStatus = null, string trackingNumber = null, string orderNumber = null, DateTime? updatedAfter = null)
+        public async Task<Parcel[]> Get(int? limit = null, int? offset = null, int? parcelStatus = null, string trackingNumber = null, string orderNumber = null, DateTime? updatedAfter = null)
         {
             var parameters = new Dictionary<string, string>();
             if (limit.HasValue)
@@ -48,20 +48,20 @@ namespace SendCloudApi.Net.V2.Resources
                 parameters.Add("order_number", orderNumber);
             if (updatedAfter.HasValue)
                 parameters.Add("updated_after", updatedAfter.Value.ToString("yyyy-MM-ddTHH:mm:ss"));
-            var apiResponse = await Get<Parcel<Country>[]>(parameters: parameters);
+            var apiResponse = await Get<Parcel[]>(parameters: parameters);
             return apiResponse.Data;
         }
 
-        public async Task<Parcel<Country>> Get(int parcelId)
+        public async Task<Parcel> Get(int parcelId)
         {
-            var apiResponse = await Get<Parcel<Country>>(parcelId);
+            var apiResponse = await Get<Parcel>(parcelId);
             return apiResponse.Data;
         }
 
-        public async Task<Parcel<Country>> Update(CreateParcel parcel)
+        public async Task<Parcel> Update(CreateParcel parcel)
         {
             var wrapper = new DataWrapper { Parcel = parcel };
-            var apiResponse = await Update<Parcel<Country>>(JsonHelper.Serialize(wrapper, DateTimeFormat));
+            var apiResponse = await Update<Parcel>(JsonHelper.Serialize(wrapper, DateTimeFormat));
             return apiResponse.Data;
         }
 

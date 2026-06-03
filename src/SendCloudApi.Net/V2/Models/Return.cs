@@ -58,9 +58,9 @@ namespace SendCloudApi.Net.V2.Models
         public string StoreLocation { get; set; }
 
         [DataMember(Name = "outgoing_parcel_data", EmitDefaultValue = false, IsRequired = false)]
-        public Parcel<Country> OutgoingParcelData { get; set; }
+        public Parcel OutgoingParcelData { get; set; }
 
         [DataMember(Name = "incoming_parcel_data", EmitDefaultValue = false, IsRequired = false)]
-        public Parcel<Country> IncomingParcelData { get; set; }
+        public Parcel IncomingParcelData { get; set; }
     }
 }
