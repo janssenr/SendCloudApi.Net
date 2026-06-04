@@ -16,6 +16,7 @@
 		<PackageIcon>cropped-5-Sendcloud-App-Icon-1-192x192.png</PackageIcon>
 		<PackageTags>sendcloud postnl api rest data</PackageTags>
 		<PackageReleaseNotes>Implementation of V3 Address Validation</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net451'">
 		<Reference Include="System.Net.Http" />
@@ -25,5 +26,8 @@
 			<Pack>True</Pack>
 			<PackagePath />
 		</None>
+		<None Include="..\..\README.md"
+        Pack="true"
+        PackagePath="README.md" />
 	</ItemGroup>
 </Project>
